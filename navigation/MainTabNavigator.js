@@ -6,6 +6,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import PostDetails from '../screens/PostDetails';
+import TestScrin from '../screens/TestScrin';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -13,8 +15,8 @@ const config = Platform.select({
 });
 
 const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
+    {
+        Home: PostDetails,
   },
   config
 );
@@ -37,7 +39,7 @@ HomeStack.path = '';
 
 const LinksStack = createStackNavigator(
   {
-    Links: LinksScreen,
+        Links: TestScrin,
   },
   config
 );
