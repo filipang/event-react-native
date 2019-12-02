@@ -16,7 +16,8 @@ firebase.initializeApp({
     "messagingSenderId": "72916424034"
 })
 const db = firebase.firestore();
-var docRef = db.collection("posts").doc("OvSInhXPS9l4ssz5hzuU");
+var colRef = db.collection("posts");
+
 
 //docRef.get().then(function (doc) {
 //    if (doc.exists) {
@@ -40,14 +41,18 @@ const TestScrin = () => {
     const [results, setResults] = useState([]);
     const makeRequest = async () => {
         if (one == 1) {
-            const response = await docRef.get();
-            setResults(response.data());
+            const response = await colRef.get();
+            setResults(response);
             one++;
         }
     }
+    var pula_mea = new Array();
     makeRequest();
-    console.log("DELIMITEZ INFORMATIA    ", results);
-    
+    results.forEach((queryDoc) => {
+        //console.log(queryDoc.data());
+        pula_mea.push(queryDoc.id)});
+   // console.log("DELIMITEZ INFORMATIA    ", results);
+    console.log(pula_mea);
    
     
     return (
