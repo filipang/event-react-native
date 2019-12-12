@@ -58,9 +58,9 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff2f2',
-        borderRadius: 20,
-        marginHorizontal: 5,
-        marginVertical:30,
+        borderRadius: 5,
+        marginHorizontal: 0,
+        marginVertical:0,
     },
     imageStyle: {
         height: 400,

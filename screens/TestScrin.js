@@ -1,38 +1,25 @@
 console.disableYellowBox = true;
-import React, { useState } from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
-import PostComponent from '../components/PostComponent';
+import React, { useState,useEffect } from 'react';
+import {StyleSheet, View} from 'react-native';
+
 import firebase from 'firebase';
-
-
+import InfiniteScroll from "../components/InfiniteScroll";
+import Tag from "../components/Tag";
 
 require('firebase/firestore');
 firebase.initializeApp({
-    "projectId": "proiectscoala-d9dd3",
-    "apiKey": "AIzaSyBgMZYxYnU9HMYov0z4LOo0AtVqGX32doY",
-    "authDomain": "proiectscoala-d9dd3.firebaseapp.com",
-    "databaseURL": "https://proiectscoala-d9dd3.firebaseio.com",
-    "storageBucket": "proiectscoala-d9dd3.appspot.com/",
-    "messagingSenderId": "72916424034"
+    "projectId": "event-dd4b9",
+    "apiKey": "AIzaSyBZ5GWPcuhxxjG1EgwNZtLgMbNrL1HuS5E",
+    "authDomain": "event-dd4b9.firebaseapp.com",
+    "databaseURL": "https://event-dd4b9.firebaseio.com",
+    "storageBucket": "event-dd4b9.appspot.com/",
+    "messagingSenderId": "93847099331"
 })
 const db = firebase.firestore();
 var colRef = db.collection("posts");
 
 
-//docRef.get().then(function (doc) {
-//    if (doc.exists) {
-
-//        console.log(doc.get('image_link'));
-
-//        var link = doc.get('image_link');
- //       TestScrin(link);
-//    } else {
-        // doc.data() will be undefined in this case
-//        console.log("No such document!");
-//    }
-//}).catch(function (error) {
-//    console.log("Error getting document:", error);
-//});
+export const database = db;
 
 
 link = 'https://playtech.ro/wp-content/uploads/2016/02/bbc-planet-earth-II-1170x644.jpg';
@@ -46,25 +33,29 @@ const TestScrin = () => {
             one++;
         }
     }
-    var pula_mea = new Array();
-    makeRequest();
-    results.forEach((queryDoc) => {
-        //console.log(queryDoc.data());
-        pula_mea.push(queryDoc.id)});
-   // console.log("DELIMITEZ INFORMATIA    ", results);
-    console.log(pula_mea);
+    useEffect(() => {
+    makeRequest()},[])
+    
    
     
+    //console.log("tank", results);
+    
     return (
-        <View><PostComponent 
-        deUndeVinePoza={results.image_link}
-        matchPercentage='99'
-        dateEvent={results.date}
-        titleEvent={results.title}
-        description={results.description}        
-    /></View>);
+        <View>
+
+        <Tag/>
+
+        </View>);
 
 }
 
 const styles = StyleSheet.create({});
 export default TestScrin;
+/*<PostComponent
+    deUndeVinePoza={item.image_link}
+    matchPercentage='99'
+    dateEvent={item.date}
+    titleEvent={item.title}
+    description={item.description}
+    <InfiniteScroll/>
+*/
