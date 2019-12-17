@@ -5,6 +5,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import SettingsScreen from '../screens/SettingsScreen';
 import PostDetails from '../screens/PostDetails';
 import TestScrin from '../screens/TestScrin';
+import CalendarScreen from '../screens/CalendarScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -53,7 +54,7 @@ LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Settings: CalendarScreen,
   },
   config
 );

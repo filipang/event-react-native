@@ -4,10 +4,25 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+import firebase from 'firebase';
 
 import AppNavigator from './navigation/AppNavigator';
 
+/// FIRESTORE INITIALIZATION
+
+require('firebase/firestore');
+firebase.initializeApp({
+    "projectId": "event-dd4b9",
+    "apiKey": "AIzaSyBZ5GWPcuhxxjG1EgwNZtLgMbNrL1HuS5E",
+    "authDomain": "event-dd4b9.firebaseapp.com",
+    "databaseURL": "https://event-dd4b9.firebaseio.com",
+    "storageBucket": "event-dd4b9.appspot.com/",
+    "messagingSenderId": "93847099331"
+})
+const db = firebase.firestore();
+export const database = db;
+
+///
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 

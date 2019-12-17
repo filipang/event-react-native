@@ -1,7 +1,7 @@
 // Imports: Dependencies
 import React from 'react';
 import { ActivityIndicator, Dimensions, FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { database } from '../screens/TestScrin';
+import { database } from '../App';
 import PostComponent from '../components/PostComponent';
 // Screen Dimensions
 const { height, width } = Dimensions.get('window');
