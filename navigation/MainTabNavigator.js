@@ -1,25 +1,26 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import PostDetails from '../screens/PostDetails';
+import TestScrin from '../screens/TestScrin';
+import CalendarScreen from '../screens/CalendarScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
-  default: {},
+    default: {headerMode:'none'},
 });
 
 const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
+    {
+        Home: TestScrin,
   },
   config
 );
 
 HomeStack.navigationOptions = {
+  
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -37,13 +38,13 @@ HomeStack.path = '';
 
 const LinksStack = createStackNavigator(
   {
-    Links: LinksScreen,
+        Links: PostDetails,
   },
   config
 );
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+  tabBarLabel: 'Search',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
@@ -53,12 +54,13 @@ LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Settings: CalendarScreen,
   },
   config
 );
 
 SettingsStack.navigationOptions = {
+    
   tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />

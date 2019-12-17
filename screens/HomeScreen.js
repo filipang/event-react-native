@@ -40,7 +40,7 @@ export default function HomeScreen() {
           </View>
 
           <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
+            asdasdasd
           </Text>
         </View>
 
@@ -83,7 +83,7 @@ function DevelopmentModeNotice() {
 
     return (
       <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
+        Development mode is enabled: your ap will be slower but you can use
         useful development tools. {learnMoreButton}
       </Text>
     );
