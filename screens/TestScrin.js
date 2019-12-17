@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 
 import firebase from 'firebase';
 import InfiniteScroll from "../components/InfiniteScroll";
-import Tag from "../components/Tag";
+
 
 require('firebase/firestore');
 firebase.initializeApp({
@@ -42,9 +42,7 @@ const TestScrin = () => {
     
     return (
         <View>
-
-        <Tag/>
-
+            <InfiniteScroll/>       
         </View>);
 
 }
@@ -57,5 +55,7 @@ export default TestScrin;
     dateEvent={item.date}
     titleEvent={item.title}
     description={item.description}
+    startDate={item.time_start}
+    endDate={item.time_end}
     <InfiniteScroll/>
 */

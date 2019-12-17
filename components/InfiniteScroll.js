@@ -1,11 +1,12 @@
 // Imports: Dependencies
-import React, { Component } from 'react';
+import React from 'react';
 import { ActivityIndicator, Dimensions, FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { database } from '../screens/TestScrin';
 import PostComponent from '../components/PostComponent';
 // Screen Dimensions
 const { height, width } = Dimensions.get('window');
 // Screen: Infinite Scroll
+
 
 export default class InfiniteScroll extends React.Component {
   constructor(props) {
@@ -37,16 +38,20 @@ export default class InfiniteScroll extends React.Component {
       });
       console.log('Retrieving Data');
       // Cloud Firestore: Query SA PUN ORDER BY COEF
-        let initialQuery = await database.collection('posts')//.limit(this.state.limit);
-        
+        let initialQuery = await database.collection('posts').limit(this.state.limit);
+        console.log("VERSIUNE 1")
+
       // Cloud Firestore: Query Snapshot
       let documentSnapshots = await initialQuery.get();
       // Cloud Firestore: Document Data
+        console.log('doc snapshot', documentSnapshots.docs);
         let documentData = documentSnapshots.docs.map(document => document.data());
-        console.log("PANA AICI A FOST ", documentData);
+        //console.log("PANA AICI A FO ", documentData[documentData.length - 1]);
+       // console.log('doc data',documentData);
       // Cloud Firestore: Last Visible Document (Document ID To Start From For Proceeding Queries)
       let lastVisible = documentData[documentData.length - 1].id;
-      // Set State
+      // Set State        
+             
       this.setState({
         documentData: documentData,
         lastVisible: lastVisible,
@@ -89,7 +94,7 @@ export default class InfiniteScroll extends React.Component {
   renderHeader = () => {
     try {
       return (
-        <Text style={styles.headerText}>Items</Text>
+        <Text style={styles.headerText}>eVent</Text>
       )
     }
     catch (error) {
@@ -125,10 +130,12 @@ export default class InfiniteScroll extends React.Component {
                   <PostComponent
                       deUndeVinePoza={item.image_link}
                       matchPercentage='99'
-                      dateEvent='32/11/2020'
                       titleEvent={item.title}
                       description={item.description}
-                  />              
+                      startDate={item.time_start.seconds}
+                      endDate={item.time_end.seconds}
+                  />   
+          
            </View>
           )}
           // Item Key
@@ -177,3 +184,4 @@ const styles = StyleSheet.create({
     color: '#000',
   },
 });
+//npm install -g expo-cli

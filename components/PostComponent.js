@@ -5,9 +5,15 @@ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 
 
-const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deUndeVinePoza, description}) => {
-    let TransmitInformatii = { titleEvent, matchPercentage, dateEvent, deUndeVinePoza, description};
-    //console.log( TransmitInformatii.description );
+const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deUndeVinePoza, description, startDate, endDate }) => {
+    let dataStart = new Date(startDate * 1000);
+    let dataEnd = new Date(endDate * 1000);
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    let dateStartString = dataStart.toLocaleDateString("en-US", options);
+    let dateEndString = dataEnd.toLocaleDateString("en-US", options);
+    let TransmitInformatii = { titleEvent, matchPercentage, dateEvent, deUndeVinePoza, description, dateStartString, dateEndString};
+    console.log('trag la sala ca un tanc', TransmitInformatii.dateStartString);
+
     var matchPercentageColor;
     if (matchPercentage < 50)
         matchPercentageColor = "#ffb84d";
@@ -15,8 +21,8 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
         matchPercentageColor = "#bfff80";
     else
         matchPercentageColor = "#1a6600";
-
-    console.log("Poza vine de la ", deUndeVinePoza);
+     
+    //console.log("Poza vine de la ", deUndeVinePoza);
     return (
         <View style={styles.container}>
             <View style={{height: 65}}>
@@ -26,7 +32,7 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
                     
                 </View>
                 <View style={{ flexDirection: 'column' }}>
-                    <Text style={{ color: 'black', fontSize: 10, marginHorizontal: 5 }}>{dateEvent}</Text>
+                    <Text style={{ color: 'black', fontSize: 10, marginHorizontal: 5 }}>{dateStartString} - {dateEndString}</Text>
                 </View>
             </View>
             
