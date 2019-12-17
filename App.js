@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import firebase from 'firebase';
-
+import ScreenSerban from './login';
 import AppNavigator from './navigation/AppNavigator';
 
 /// FIRESTORE INITIALIZATION
@@ -37,8 +37,8 @@ export default function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <ScreenSerban />
       </View>
     );
   }
