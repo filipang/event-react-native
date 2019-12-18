@@ -9,16 +9,15 @@ export const logoutUser = () => {
 export const signInUser = async ({ name, email, password }) => {
   try {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
-    const ref = database.collection('UMHRELE').doc(firebase.auth().currentUser.uid);
-     ref.add({
-      displayName: name,
-      email: firebase.auth().currentUser.email,
-    });
+    // database.collection('users').doc(firebase.auth().currentUser.uid).set({
+    //   displayName: name,
+    //   email: firebase.auth().currentUser.email,
+    // });
 
 
     return {};
   } catch (error) {
-    switch (error.code) {
+    switch (error.code) { 
       case "auth/email-already-in-use":
         return {
           error: "E-mail already in use."

@@ -1,10 +1,14 @@
 import React, { memo, useState, useEffect } from "react";
 import Background from "../components/Background";
 import { FlatList, StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
-import { Chip } from 'react-native-paper';
+import { Chip, Button } from 'react-native-paper';
 import { Tag } from '../components/Tag';
-
-
+import "firebase/firestore"
+import "firebase/auth"
+import firebase from "firebase"
+import { database } from '../../App';
+import { SearchBar } from 'react-native-elements';
+import NavigatorFeed from '../../navigation/NavigatorFeed';
 const tagSelectorData = [
   {
     id: '1',
@@ -52,10 +56,76 @@ const tagSelectorData = [
 ];
 
 
+const useDebounce = (value: any, delay: number) => {
+  const [debounceValue, setDebounceValue] = useState(value);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebounceValue(value);
+    }, delay);
 
-const Dashboard = () => {
-    return (<Text>negroo geani</Text>)
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+
+  return debounceValue;
+};
+
+const tagList = Object.values(tagSelectorData)
+  .map(tags => ({
+    ...tags,
+    lowerCaseName: tags.title.toLowerCase(),
+  })).sort((a, b) => a.title > b.title);
+
+const Dashboard = ({ navigation }) => {
+  const [query, setQuery] = useState('');
+  const debounceQuery = useDebounce(query, 300);
+  const [filteredTagList, setFilteredTagList] = useState(tagList);
+  
+
+  useEffect(() => {
+    const lowerCaseQuery = debounceQuery.toLowerCase();
+    const newTags = tagList
+      .filter((tag) => tag.lowerCaseName.includes(lowerCaseQuery))
+      .map((tag)=>({
+        ...tag,
+        rank: tag.lowerCaseName.indexOf(lowerCaseQuery),
+      }))
+      .sort((a, b) => a.rank - b.rank);
+
+      setFilteredTagList(newTags);
+
+  }, [debounceQuery]);
+
+  onTouch = () => {
+    database.collection('users').doc(firebase.auth().currentUser.uid).set({
+      email: firebase.auth().currentUser.email,
+      tags: tagSelectorData
+    });
+      navigation.navigate("AppNavigator");
+  }
+  return(<View>
+    <SearchBar
+      placeholder="Search your tags..."
+      onChangeText={setQuery}
+      value={query}
+    />
+    <FlatList
+      keyExtractor={(item, index) => `${index}`}
+      data={filteredTagList}
+      renderItem={({item}) => <Chip style={styles.flatlist_items}>{item.title}</Chip>}
+    />
+    <Button 
+    title="Go to Bratu Screen"
+    onPress={
+      this.onTouch
+      }>Go to Bratu Screen</Button>
+    
+
+    
+  </View>
+  )
 };
 
 

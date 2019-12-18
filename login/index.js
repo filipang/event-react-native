@@ -10,6 +10,8 @@ import {
   Dashboard
 } from "./screens";
 
+import AppNavigator from '../navigation/AppNavigator'
+
 const Router = createStackNavigator(
   {
     HomeScreen,
@@ -17,7 +19,8 @@ const Router = createStackNavigator(
     RegisterScreen,
     ForgotPasswordScreen,
     Dashboard,
-    AuthLoadingScreen
+    AuthLoadingScreen,
+    AppNavigator
   },
   {
     initialRouteName: "AuthLoadingScreen",
