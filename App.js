@@ -22,7 +22,7 @@ firebase.initializeApp({
 const db = firebase.firestore();
 export const database = db;
 
-///
+
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 

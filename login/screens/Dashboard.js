@@ -8,7 +8,6 @@ import "firebase/auth"
 import firebase from "firebase"
 import { database } from '../../App';
 import { SearchBar } from 'react-native-elements';
-import NavigatorFeed from '../../navigation/NavigatorFeed';
 const tagSelectorData = [
   {
     id: '1',

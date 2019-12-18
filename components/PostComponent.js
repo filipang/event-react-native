@@ -19,7 +19,7 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
 
     //Creez un obiect cu toate informatiile relevante
     let TransmitInformatii = { titleEvent, matchPercentage, dateEvent, deUndeVinePoza, description, dateStartString, dateEndString};
-    console.log('trag la sala ca un tanc', TransmitInformatii.dateStartString);
+    
     
 
     var matchPercentageColor;
@@ -44,7 +44,7 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
                 </View>
             </View>
             
-            <TouchableOpacity onPress={() => { navigation.navigate({ routeName: 'Links', params: { skill: TransmitInformatii } }) }}>           
+            <TouchableOpacity onPress={() => { navigation.navigate({ routeName: 'DetailPost', params: { skill: TransmitInformatii } }) }}>           
                 <Image source={{
                     uri: deUndeVinePoza}} style={styles.imageStyle}/>
             </TouchableOpacity>
@@ -55,7 +55,7 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
                         'Alert Title',
                         'Eveniment adaugat cu succes in calendar.',
                         [
-                            { text: 'Vezi Calendarul', onPress: () => { navigation.navigate({ routeName: 'Settings', params: { skill: TransmitInformatii } }) }  },                            
+                            { text: 'Vezi Calendarul', onPress: () => { navigation.navigate({ routeName: 'PostFullscreen', params: { skill: TransmitInformatii } }) }  },                            
                             { text: 'OK', onPress: () => console.log('OK Pressed') },
                         ],
                         { cancelable: true },

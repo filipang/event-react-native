@@ -28,7 +28,7 @@ export default class InfiniteScroll extends React.Component {
     catch (error) {
       console.log(error);
     }
-  };
+    };
   // Retrieve Data
   retrieveData = async () => {
     try {
@@ -132,8 +132,8 @@ export default class InfiniteScroll extends React.Component {
                       matchPercentage='99'
                       titleEvent={item.title}
                       description={item.description}
-                      // startDate={item.time_start.seconds}
-                      // endDate={item.time_end.seconds}
+                      startDate={item.time_start.seconds}
+                      endDate={item.time_end.seconds}
                   />   
           
            </View>

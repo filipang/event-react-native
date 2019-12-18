@@ -7,6 +7,7 @@ import PostDetails from '../screens/PostDetails';
 import TestScrin from '../screens/TestScrin';
 import CalendarScreen from '../screens/CalendarScreen';
 
+
 const config = Platform.select({
   web: { headerMode: 'screen' },
     default: {headerMode:'none'},
@@ -15,6 +16,8 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
     {
         Home: TestScrin,
+        PostFullscreen: CalendarScreen,
+        DetailPost: PostDetails,
   },
   config
 );
@@ -35,10 +38,10 @@ HomeStack.navigationOptions = {
 };
 
 HomeStack.path = '';
-
+//Aici inclocuieste tu serban
 const LinksStack = createStackNavigator(
-  {
-        Links: PostDetails,
+    {
+        Links: CalendarScreen,
   },
   config
 );
@@ -54,7 +57,7 @@ LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
-    Settings: CalendarScreen,
+        Settings: SettingsScreen,
   },
   config
 );
