@@ -36,15 +36,15 @@ export default class InfiniteScroll extends React.Component {
       this.setState({
         loading: true,
       });
-      console.log('Retrieving Data');
+      //console.log('Retrieving Data');
       // Cloud Firestore: Query SA PUN ORDER BY COEF
         let initialQuery = await database.collection('posts').limit(this.state.limit);
-        console.log("VERSIUNE 1")
+        
 
       // Cloud Firestore: Query Snapshot
       let documentSnapshots = await initialQuery.get();
       // Cloud Firestore: Document Data
-        console.log('doc snapshot', documentSnapshots.docs);
+        //console.log('doc snapshot', documentSnapshots.docs);
         let documentData = documentSnapshots.docs.map(document => document.data());
         //console.log("PANA AICI A FO ", documentData[documentData.length - 1]);
        // console.log('doc data',documentData);
