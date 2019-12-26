@@ -6,7 +6,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import PostDetails from '../screens/PostDetails';
 import TestScrin from '../screens/TestScrin';
 import CalendarScreen from '../screens/CalendarScreen';
-
+import OurSettingScreen from '../screens/OurSettingScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -57,7 +57,8 @@ LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
-        Settings: SettingsScreen,
+        Settings: OurSettingScreen,
+        Settings_calendar: CalendarScreen,
   },
   config
 );
