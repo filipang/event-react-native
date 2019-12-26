@@ -7,6 +7,9 @@ import { Ionicons } from '@expo/vector-icons';
 import firebase from 'firebase';
 import ScreenSerban from './login';
 import AppNavigator from './navigation/AppNavigator';
+////Console supression
+console.disableYellowBox = true;
+
 
 /// FIRESTORE INITIALIZATION
 
