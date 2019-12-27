@@ -71,7 +71,7 @@ export default class InfiniteScroll extends React.Component {
       });
       console.log('Retrieving additional Data');
       // Cloud Firestore: Query (Additional Query)   SA PUN AICI ORDER BY COEF
-        let additionalQuery = await database.collection('users')//.startAfter(this.state.lastVisible).limit(this.state.limit);              
+        let additionalQuery = await database.collection('users').startAfter(this.state.lastVisible).limit(this.state.limit);              
        
       // Cloud Firestore: Query Snapshot
       let documentSnapshots = await additionalQuery.get();
