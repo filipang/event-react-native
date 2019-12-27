@@ -2,6 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Dimensions, FlatList, SafeAreaView, StyleSheet, Text, View, Picker } from 'react-native';
 import { database } from '../App';
 import PostComponent from '../components/PostComponent';
+import { awaitExpression } from '@babel/types';
 // Screen Dimensions
 const { height, width } = Dimensions.get('window');
 // Screen: Infinite Scroll
@@ -81,13 +82,20 @@ export default class CalendarPicker extends React.Component {
     //////SA MODIFIC CA E UN PISAT
     retrieveData = async () => {
         try {
-            //const TANK = this.arrayToObject(this.state.databasic, 'id');
-            // console.log("tankul este ", TANK);
-            //this.setState({
-            //     ObjData: TANK,
-            // });
-            // let initialQuery = await database.collection('users').doc(this.state.userId);
-            //let documentSnapshots = await initialQuery.get("email");
+            let DocDataArray = [];
+            let initialQuery = await database.collection('users').doc(this.state.userId).get();
+            let interested_posts = initialQuery.get("interested_posts");
+            for (const post of interested_posts) {
+            
+                
+                let postData = await post.get();
+                console.log("TEST");
+                console.log(postData);
+                DocDataArray.push(postData);
+
+            };
+            this.setState({ documentData: DocDataArray });
+            console.log("LOLLOL",DocDataArray[0]);
             //var sos = documentSnapshots.get("email");
             //  console.log('AICI E FOARTE IMPORTATNTA FAZA', documentSnapshots);
             //console.log("DOC SNAPSH", documentSnapshots);
@@ -114,14 +122,18 @@ export default class CalendarPicker extends React.Component {
         switch (txt) {
             case 'This week':
                 console.log("tw ", txt);
+                //Query this week
                 break;
             case 'Tomorrow':
+                //Query 24h
                 console.log("tm ", txt);
                 break;
             case 'Past':
+                //Query ev trecut
                 console.log("ps ", txt);
                 break;
             case 'All':
+                //Query toate
                 console.log("Al ", txt);
                 break;
             default:
