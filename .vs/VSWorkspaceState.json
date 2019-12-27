@@ -2,13 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\components",
-    "\\components\\__tests__\\__snapshots__",
     "\\login",
-    "\\login\\components",
     "\\login\\screens",
     "\\navigation",
     "\\screens"
   ],
-  "SelectedNode": "\\login\\screens\\Dashboard.js",
+  "SelectedNode": "\\screens\\OurSettingScreen.js",
   "PreviewInSolutionExplorer": false
 }
