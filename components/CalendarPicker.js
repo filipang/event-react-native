@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, Dimensions, FlatList, SafeAreaView, StyleSheet, Text, View, Picker } from 'react-native';
 import { database } from '../App';
-import PostComponent from '../components/PostComponent';
+import CalendarPostComponent from '../components/CalendarPostComponent';
 import { awaitExpression } from '@babel/types';
 // Screen Dimensions
 const { height, width } = Dimensions.get('window');
@@ -89,28 +89,14 @@ export default class CalendarPicker extends React.Component {
             
                 
                 let postData = await post.get();
-                console.log("TEST");
-                console.log(postData);
+                //console.log("TEST");
+                //console.log(postData);
                 DocDataArray.push(postData);
 
             };
             this.setState({ documentData: DocDataArray });
-            console.log("LOLLOL",DocDataArray[0]);
-            //var sos = documentSnapshots.get("email");
-            //  console.log('AICI E FOARTE IMPORTATNTA FAZA', documentSnapshots);
-            //console.log("DOC SNAPSH", documentSnapshots);
-            // let documentData = documentSnapshots.docs.map(document => document.data());
-            //console.log("PANA AICI este schema ", documentData[documentData.length - 1]);
-            // this.setState({
-            //    documentData: documentData,               
-            // });
-            // var ceva = this.state.documentData[0].interested_posts[0];
-            // var ceva2 = await ceva.get();
-
-            //console.log("PANA AICI este schema ", documentData[documentData.length - 1]);
-
-            //console.log("TONI MONRTANA DE ROMANIA",ceva2);
-
+            console.log("LOLLOL", DocDataArray[0]);
+            console.log('DocData[0].title', this.state.documentData[0].get('title'));
         } catch (error) {
             console.log(error);
         }
@@ -143,14 +129,17 @@ export default class CalendarPicker extends React.Component {
 
         }
     }
+    SeparatorulMeu = () => {
+        return (<View style={{ height: 1, width: "100%", backgroundColor: "#000", }} />);
+    }
 
     //Render
     render() {
         return (
-            <View style={{marginVertical: 300}}>
+            <View style={{marginVertical: 30}}>
                 <Picker
                     selectedValue={this.state.activeText}
-                    style={{ height: 50, width: 400 }}
+                    style={{ height: 50, width: width }}
                     onValueChange={(itemValue, itemIndex) => {                       
                         this.setState({ activeText: itemValue });                        
                         this.updateQuery(itemValue);
@@ -159,28 +148,27 @@ export default class CalendarPicker extends React.Component {
                     <Picker.Item label="Tomorrow" value="Tomorrow" />
                     <Picker.Item label="Past" value="Past" />
                     <Picker.Item label="All" value="All" />
-                </Picker>
-            <FlatList
-                // Data
-                data={this.state.databasic}
-                // Render Items
-                renderItem={({ item }) => (
-                    <Text>{item.title}</Text>
-                )}
-                // Item Key
-                keyExtractor={(item, index) => String(index)}
-                // Header (Title)
-                ListHeaderComponent={this.renderHeader}
-                // Footer (Activity Indicator)
-                ListFooterComponent={this.renderFooter}
-                // On End Reached (Takes a function)
-                onEndReached={this.retrieveMore} //mai adaug niste astea eu
-                // How Close To The End Of List Until Next Data Request Is Made
-                onEndReachedThreshold={0}
-                // Refreshing (Set To True When End Reached)
-                refreshing={this.state.refreshing}
+                </Picker>                
+                <FlatList
+                    // Data
+                    data={this.state.documentData}
+                    ItemSeparatorComponent={this.SeparatorulMeu}
+                    // Render Items
+                    renderItem={({ item }) => (                                               
+                        <CalendarPostComponent
+                            titleEvent={item.get('title')}
+                            startDate={item.get('time_start').seconds * 1000}
+                            endDate={item.get('time_end').seconds * 1000}
+                            deUndeVinePoza={item.get('image_link')}
+                        />
+
+
+                    )}
+                    // Item Key
+                    keyExtractor={(item, index) => String(index)}                    
                 />
-             </View >
+            </View >
+            
         );
     }
 }
@@ -208,8 +196,31 @@ const styles = StyleSheet.create({
         },
         text: {
             fontFamily: 'System',
-            fontSize: 16,
-            fontWeight: '400',
-            color: '#000',
-        },
-    });
+                fontSize: 16,
+                fontWeight: '400',
+                color: '#000',
+            },
+        });
+    
+    
+            /*<FlatList
+                    // Data
+                    data={this.state.databasic}
+                    // Render Items
+                    renderItem={({ item }) => (
+                        <Text>{item.title}</Text>
+                    )}
+                    // Item Key
+                    keyExtractor={(item, index) => String(index)}
+                    // Header (Title)
+                    ListHeaderComponent={this.renderHeader}
+                    // Footer (Activity Indicator)
+                    ListFooterComponent={this.renderFooter}
+                    // On End Reached (Takes a function)
+                    onEndReached={this.retrieveMore} //mai adaug niste astea eu
+                    // How Close To The End Of List Until Next Data Request Is Made
+                    onEndReachedThreshold={0}
+                    // Refreshing (Set To True When End Reached)
+                    refreshing={this.state.refreshing}
+                />
+            */
