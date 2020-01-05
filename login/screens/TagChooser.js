@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Chip, Button } from 'react-native-paper';
-import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, TouchableHighlight
-, RefreshControl, TextInput } from 'react-native';
-import firebase from 'firebase';
+import {FlatList,View,Platform
+} from 'react-native';
+
 import { database } from '../../App'
 import { SearchBar } from 'react-native-elements';
-
+import ChipComponent from '../../components/ChipComponent';
 export default class TagChooser extends Component{
-
     constructor(props){
         super(props);
         this.state=({
@@ -27,11 +25,7 @@ export default class TagChooser extends Component{
       catch (error) {
         console.log(error);
       }
-      this.state.tags.forEach((doc)=>{
-          this.state.tags.push({
-          name: doc.data().name
-        })
-      })
+      
     //     this.unsubscribe = this.ref.onSnapshot((querySnapshot) => {
     //         const taguri = [];
     //         querySnapshot.forEach((doc) => {
@@ -47,11 +41,11 @@ export default class TagChooser extends Component{
 
     retrieveData = async () => {
       try {
-          let initialQuery = await database.collection('users').doc(firebase.auth().currentUser.uid).get();
-          let taguri = initialQuery.get("tags");
-          console.log(taguri)
+          let initialQuery = await database.collection('tags'); 
+          let documentSnapshots = await initialQuery.get();
+          let documentData = documentSnapshots.docs.map(document => document.data());
           this.setState({
-            tags: taguri
+              tags: documentData
           });
           console.log(this.state.tags);
   
@@ -67,16 +61,14 @@ export default class TagChooser extends Component{
                 <SearchBar
                placeholder="Search your tags..."
     
-              />
-                <FlatList
-                data = {this.state.tags}
-                renderItem={({item, index}) => {
-                    return(
-                        <Chip>{item.name}</Chip>
-                    );
-                }}
-                keyExtractor={(item, index) => item.name}
-                ></FlatList>
+                />
+                <FlatList 
+                    data={this.state.tags}
+                    keyExtractor={(item) => item.name}
+                    renderItem={({ item }) => {                       
+                        return (<ChipComponent name={item.name} />);                                
+                        }}
+                />
 
 
             </View>
