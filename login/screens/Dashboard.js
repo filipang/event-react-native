@@ -8,6 +8,7 @@ import "firebase/auth"
 import firebase from "firebase"
 import { database } from '../../App';
 import { SearchBar } from 'react-native-elements';
+import TagChooser from '../components/TagChooser';
 const tagSelectorData = [
   {
     id: '1',
@@ -113,7 +114,7 @@ const Dashboard = ({ navigation }) => {
     <FlatList
       keyExtractor={(item, index) => `${index}`}
       data={filteredTagList}
-      renderItem={({item}) => <Chip style={styles.flatlist_items}>{item.title}</Chip>}
+          renderItem={({ item }) => <TagChooser/>}
     />
     <Button 
     title="Go to Bratu Screen"
