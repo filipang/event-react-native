@@ -8,23 +8,41 @@ import {useState} from  'react';
 import TagChooser from '../login/screens/TagChooser';
 
 
-const ChipComponent = ({selected, name, props}) =>{
-    const [selection,setSelected] = useState(false);
-    return(
-        <Chip 
-          onPress={()=>{
-            if(selection == true) setSelected(false);
-        if(selection == false) setSelected(true);
+export default class ChipComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = ({
+            selection: false,
+            name: this.props.name,
+            
+        })
+        
+    
     }
+    componentDidMount() {
+        try {
+            this.props.mama;
+            console.log('Lol ', this.props.mama);
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
-         selected={selection}>{name}</Chip>
-    )
+    render() {
+        return (
+            <Chip
+                onPress={() => {
+                    this.props.mama();
+                    
+                }
+                }
+                selected={this.state.selection}>{this.state.name}</Chip>
+        )
+    }
+
+
+
 }
-
-
-
-
 const styles = StyleSheet.create({
 
 })
-export default ChipComponent;
