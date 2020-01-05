@@ -10,12 +10,9 @@ export default class TagChooser extends Component{
         super(props);
         this.state=({
             tags: [],
-            
+            Integerr: 0,
         });
-        //DE AICI EXTRAGI DATELE
-        this.ref =  database.collection('tags')
-        
-        //await database.collection('posts').limit(this.state.limit);
+        this.mama = this.mama.bind(this);
     }
     componentDidMount(){
       try {
@@ -38,7 +35,12 @@ export default class TagChooser extends Component{
     // }
 
     }
-
+    mama = () => {
+        let nr = this.state.Integerr;
+        nr++;
+        this.setState({Integerr:nr})
+        console.log(nr);
+    }
     retrieveData = async () => {
       try {
           let initialQuery = await database.collection('tags'); 
@@ -66,7 +68,7 @@ export default class TagChooser extends Component{
                     data={this.state.tags}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }) => {                       
-                        return (<ChipComponent name={item.name} />);                                
+                        return (<ChipComponent mama={this.mama} name={item.name} />);                                
                         }}
                 />
 
