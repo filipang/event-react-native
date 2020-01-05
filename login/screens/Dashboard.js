@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect } from "react";
 import Background from "../components/Background";
 import { FlatList, StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import { Chip, Button } from 'react-native-paper';
-import { Tag } from '../components/Tag';
+
 import "firebase/firestore"
 import "firebase/auth"
 import firebase from "firebase"
