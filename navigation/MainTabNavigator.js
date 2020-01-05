@@ -7,6 +7,7 @@ import PostDetails from '../screens/PostDetails';
 import TestScrin from '../screens/TestScrin';
 import CalendarScreen from '../screens/CalendarScreen';
 import OurSettingScreen from '../screens/OurSettingScreen';
+import DiscoverScreen from '../screens/DiscoverScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -41,7 +42,7 @@ HomeStack.path = '';
 //Aici inclocuieste tu serban
 const LinksStack = createStackNavigator(
     {
-        Links: CalendarScreen,
+        Links: DiscoverScreen,
   },
   config
 );

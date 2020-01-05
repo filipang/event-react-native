@@ -3,6 +3,7 @@ import React from 'react';
 import { ActivityIndicator, Dimensions, FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { database } from '../App';
 import PostComponent from '../components/PostComponent';
+import {SearchBar} from 'react-native-elements'
 // Screen Dimensions
 const { height, width } = Dimensions.get('window');
 // Screen: Infinite Scroll
@@ -17,6 +18,8 @@ export default class InfiniteScroll extends React.Component {
       lastVisible: null,
       loading: false,
       refreshing: false,
+      filteredData:[],
+      searchText: ""
     };
   }
   // Component Did Mount
@@ -58,7 +61,7 @@ export default class InfiniteScroll extends React.Component {
         loading: false,
       });
     }
-    catch (error) {
+    catch (error) {   
       console.log(error);
     }
   };
@@ -90,12 +93,28 @@ export default class InfiniteScroll extends React.Component {
       console.log(error);
     }
   };
+
+  search = (searchText) => {
+    this.setState({searchText: searchText});
+    let filteredData = this.state.documentData.filter(function(item){
+        return item.title.includes(searchText);
+    });
+    this.setState({filteredData: filteredData})
+}
   // Render Header
   renderHeader = () => {
     try {
       return (
-        <Text style={styles.headerText}>eVent</Text>
-      )
+        <SearchBar
+        showCancel={true}
+        lightTheme={true}
+        autoCorrect={false}
+        onChangeText={this.search}
+        value={this.state.searchText}
+       placeholder="Search through posts..."
+
+      />
+        )
     }
     catch (error) {
       console.log(error);
@@ -123,7 +142,7 @@ export default class InfiniteScroll extends React.Component {
       <SafeAreaView style={styles.container}>
         <FlatList
           // Data
-          data={this.state.documentData}
+          data = {this.state.filteredData && this.state.filteredData.length > 0 ? this.state.filteredData : this.state.documentData}
           // Render Items
           renderItem={({ item }) => (
               <View style={styles.itemContainer}>
