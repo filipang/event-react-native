@@ -1,28 +1,35 @@
 import React, { memo } from "react";
-import Background from "../components/Background";
-import Logo from "../components/Logo";
-import Header from "../components/Header";
+import Text from '../components/Text'
+import Block from '../components/Block'
 import Button from "../components/Button";
-import Paragraph from "../components/Paragraph";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const HomeScreen = ({ navigation }) => (
-  <Background>
-    <Logo />
-    <Header>Firebase Login</Header>
+  <KeyboardAwareScrollView style={{ marginVertical: 40 }} showsVerticalScrollIndicator={false}>
+  <Block flex center>
 
-    <Paragraph>
-      This template supports Firebase authorization out of the box.
-    </Paragraph>
-    <Button mode="contained" onPress={() => navigation.navigate("LoginScreen")}>
-      Login
-    </Button>
-    <Button
-      mode="outlined"
-      onPress={() => navigation.navigate("RegisterScreen")}
-    >
-      Sign Up
-    </Button>
-  </Background>
+  <Text h3 style={{marginBottom: 6, marginTop: 80}}>Welcome to eVent</Text>
+   <Text paragraph color="black3">Find all your events. In one place.</Text>
+   
+   <Block center style={{marginTop: 300}}>
+   <Button
+   onPress={() => navigation.navigate("RegisterScreen")}
+   full
+   style={{marginBottom : 12}}
+   >
+     <Text button>Sign Up</Text>
+   </Button>
+
+   <Button
+   onPress={() => navigation.navigate("LoginScreen")}
+   full
+   style={{marginBottom : 12}}
+   >
+     <Text button>Login</Text>
+   </Button>
+   </Block>
+   </Block>
+   </KeyboardAwareScrollView>
 );
 
 export default memo(HomeScreen);

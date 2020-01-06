@@ -1,12 +1,13 @@
 import React, { memo, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Background from "../components/Background";
-import Logo from "../components/Logo";
-import Header from "../components/Header";
+import { StyleSheet } from "react-native";
+import Text from '../components/Text'
+import Block from "../components/Block";
 import Button from "../components/Button";
-import TextInput from "../components/TextInput";
+import Input from "../components/Input";
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 import {
   emailValidator,
   passwordValidator,
@@ -52,25 +53,30 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <Background>
+    <KeyboardAwareScrollView style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
+
+      <Block flex center>
       <BackButton goBack={() => navigation.navigate("HomeScreen")} />
 
-      <Logo />
+        <Text h3 style={{marginBottom: 6, marginTop: 48}}
+        >
+          Register to eVent
+        </Text>
+        <Block center style={{marginTop: 25}}>
 
-      <Header>Create Account</Header>
-
-      <TextInput
+      <Input
+        full
         label="Name"
-        returnKeyType="next"
         value={name.value}
         onChangeText={text => setName({ value: text, error: "" })}
         error={!!name.error}
         errorText={name.error}
+        style={{ marginBottom: 25 }}
       />
 
-      <TextInput
+      <Input
+        full
         label="Email"
-        returnKeyType="next"
         value={email.value}
         onChangeText={text => setEmail({ value: text, error: "" })}
         error={!!email.error}
@@ -79,47 +85,49 @@ const RegisterScreen = ({ navigation }) => {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
+        style={{ marginBottom: 25 }}
       />
 
-      <TextInput
+      <Input
+        full
         label="Password"
-        returnKeyType="done"
         value={password.value}
         onChangeText={text => setPassword({ value: text, error: "" })}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
         autoCapitalize="none"
+        style={{ marginBottom: 25 }}
       />
 
       <Button
+        style={{marginBottom: 12}}
+        full
         loading={loading}
         mode="contained"
         onPress={_onSignUpPressed}
-        style={styles.button}
       >
-        Sign Up
-      </Button>
+        <Text button>Create Account</Text>
+              </Button>
 
-      <View style={styles.row}>
-        <Text style={styles.label}>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-          <Text style={styles.link}>Login</Text>
-        </TouchableOpacity>
-      </View>
+      <Text paragraph color="gray">
+        Already have an account?<Text paragraph color="blue" onPress={()=>navigation.navigate('LoginScreen')}>
+          Login.
+        </Text>
+      </Text>
 
       <Toast message={error} onDismiss={() => setError("")} />
-    </Background>
-  );
+      </Block>
+      </Block>
+
+  </KeyboardAwareScrollView>  );
 };
 
 const styles = StyleSheet.create({
   label: {
     color: theme.colors.secondary
   },
-  button: {
-    marginTop: 24
-  },
+  
   row: {
     flexDirection: "row",
     marginTop: 4

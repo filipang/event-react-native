@@ -1,15 +1,16 @@
 import React, { memo, useState } from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { emailValidator } from "../core/utils";
-import Background from "../components/Background";
 import BackButton from "../components/BackButton";
-import Logo from "../components/Logo";
-import Header from "../components/Header";
-import TextInput from "../components/TextInput";
+import Text from '../components/Text';
+import Block from '../components/Block';
+import Input from "../components/Input";
 import { theme } from "../core/theme";
 import Button from "../components/Button";
 import { sendEmailWithPassword } from "../api/auth-api";
 import Toast from "../components/Toast";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: "", error: "" });
@@ -43,15 +44,18 @@ const ForgotPasswordScreen = ({ navigation }) => {
   };
 
   return (
-    <Background>
-      <BackButton goBack={() => navigation.navigate("LoginScreen")} />
+    <KeyboardAwareScrollView style={{marginVertical: 20}} showsVerticalScrollIndicator={false}>
+    <Block flex center>
+    <BackButton goBack={() => navigation.navigate("LoginScreen")} />
 
-      <Logo />
+    <Text h3 style={{marginBottom: 6, marginTop: 48}}>
+      Forgot password
+    </Text>
 
-      <Header>Restore Password</Header>
-
-      <TextInput
-        label="E-mail address"
+    <Block center style={{marginTop: 25}}>
+      <Input
+        label="email"
+        full
         returnKeyType="done"
         value={email.value}
         onChangeText={text => setEmail({ value: text, error: "" })}
@@ -61,31 +65,30 @@ const ForgotPasswordScreen = ({ navigation }) => {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
+        style={{marginBottom: 25}}
       />
 
       <Button
+      full
         loading={loading}
         mode="contained"
         onPress={_onSendPressed}
         style={styles.button}
       >
-        Send Reset Instructions
+        <Text button>Send Reset Instructions</Text>
       </Button>
 
-      <TouchableOpacity
-        style={styles.back}
-        onPress={() => navigation.navigate("LoginScreen")}
-      >
-        <Text style={styles.label}>← Back to login</Text>
-      </TouchableOpacity>
 
       <Toast
         type={toast.type}
         message={toast.value}
         onDismiss={() => setToast({ value: "", type: "" })}
       />
-    </Background>
-  );
+      </Block>
+      </Block>
+</KeyboardAwareScrollView>
+
+);
 };
 
 const styles = StyleSheet.create({
