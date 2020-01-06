@@ -46,7 +46,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAwareScrollView style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
+    // <KeyboardAwareScrollView style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
 
 
 
@@ -106,7 +106,7 @@ const LoginScreen = ({ navigation }) => {
       
       </Block>
       </Block>
-      </KeyboardAwareScrollView>
+      // </KeyboardAwareScrollView>
   );
 };
 

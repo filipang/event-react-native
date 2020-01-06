@@ -44,7 +44,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAwareScrollView style={{marginVertical: 20}} showsVerticalScrollIndicator={false}>
+    // <KeyboardAwareScrollView style={{marginVertical: 20}} showsVerticalScrollIndicator={false}>
     <Block flex center>
     <BackButton goBack={() => navigation.navigate("LoginScreen")} />
 
@@ -86,7 +86,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
       />
       </Block>
       </Block>
-</KeyboardAwareScrollView>
+// </KeyboardAwareScrollView>
 
 );
 };
