@@ -1,41 +1,36 @@
-import React, { Component } from "react";
-import { StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import React, { memo } from "react";
+import { StyleSheet } from "react-native";
 import { Button as PaperButton } from "react-native-paper";
-import * as theme from './theme'
-const { width } = Dimensions.get("window");
-export default class Button extends Component {
-  render(){
-    const { style, full, opacity, children, ...props } = this.props;
-    const buttonStyles = [
+import { theme } from "../core/theme";
+
+const Button = ({ mode, style, children, ...props }) => (
+  <PaperButton
+    style={[
       styles.button,
-      full && styles.full,
-      style,
-    ];
-
-    return(
-      <TouchableOpacity
-      style={buttonStyles}
-      activeOpacity={opacity || 0.8}
-      {...props}
-      >
-        {children}
-      </TouchableOpacity>
-    )
-  }
-
-  
-}
+      mode === "outlined" && { backgroundColor: theme.colors.surface },
+      style
+    ]}
+    labelStyle={[
+      styles.text,
+      mode === "contained" && { color: theme.colors.surface }
+    ]}
+    mode={mode}
+    {...props}
+  >
+    {children}
+  </PaperButton>
+);
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: theme.colors.blue,
-    borderRadius: 4,
-    height: 55,
-    paddingVertical: 11,
-    alignItems: 'center',
-    justifyContent: 'center'
+    width: "100%",
+    marginVertical: 10
   },
-  full: {
-    width: width - 50
+  text: {
+    fontWeight: "bold",
+    fontSize: 15,
+    lineHeight: 26
   }
-})
+});
+
+export default memo(Button);

@@ -1,18 +1,16 @@
 import React, { memo, useState } from "react";
-import { StyleSheet, Dimensions } from "react-native";
-import Text from '../components/Text'
+import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
+import Background from "../components/Background";
+import Logo from "../components/Logo";
+import Header from "../components/Header";
+import Button from "../components/Button";
+import TextInput from "../components/TextInput";
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 import { emailValidator, passwordValidator } from "../core/utils";
 import { loginUser } from "../api/auth-api";
 import Toast from "../components/Toast";
-import Block from '../components/Block';
-import Input from '../components/Input'
-import Button from '../components/Button'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-
-const { height } = Dimensions.get('window');
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
@@ -46,22 +44,14 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAwareScrollView style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
-
-
-
-    <Block flex center>
-
+    <Background>
       <BackButton goBack={() => navigation.navigate("HomeScreen")} />
 
-        <Text h3 style={{marginBottom: 6, marginTop: 48}}>
-          Sign in to eVent
-        </Text>
-      
-      <Block center style={{marginTop: 25}}>
-      <Input
-        style={{marginBottom: 25}}
-        full
+      <Logo />
+
+      <Header>Welcome back.</Header>
+
+      <TextInput
         label="Email"
         returnKeyType="next"
         value={email.value}
@@ -74,9 +64,7 @@ const LoginScreen = ({ navigation }) => {
         keyboardType="email-address"
       />
 
-      <Input
-        style={{marginBottom: 25}}
-        full
+      <TextInput
         label="Password"
         returnKeyType="done"
         value={password.value}
@@ -85,28 +73,29 @@ const LoginScreen = ({ navigation }) => {
         errorText={password.error}
         secureTextEntry
         autoCapitalize="none"
-        rightLabel={
-          <Text paragraph color="gray" onPress={() => navigation.navigate("ForgotPasswordScreen")}>
-          Forgot your password?
-          </Text>
-        }
       />
 
-    
-         
-      <Button full style={{marginBottom: 12}} loading={loading} mode="contained" onPress={_onLoginPressed}>
-        <Text button>Login</Text>
+      <View style={styles.forgotPassword}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("ForgotPasswordScreen")}
+        >
+          <Text style={styles.label}>Forgot your password?</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Button loading={loading} mode="contained" onPress={_onLoginPressed}>
+        Login
       </Button>
 
-      <Text paragraph color="gray">Don't have an account?
-      <Text color="blue" onPress={()=> navigation.navigate('RegisterScreen')}>
-        Sign Up.</Text></Text>
+      <View style={styles.row}>
+        <Text style={styles.label}>Don’t have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}>
+          <Text style={styles.link}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
 
       <Toast message={error} onDismiss={() => setError("")} />
-      
-      </Block>
-      </Block>
-      </KeyboardAwareScrollView>
+    </Background>
   );
 };
 
