@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {FlatList,View,Platform,TouchableOpacity, StyleSheet
+import {FlatList,View,Platform,TouchableOpacity,Text
 } from 'react-native';
-import * as theme from '../components/theme'
-import { IonIcons } from '@expo/vector-icons'
+
 import { database } from '../../App'
 import { SearchBar } from 'react-native-elements';
 import ChipComponent from '../../components/ChipComponent';
-import Text from '../components/Text';
 export default class TagChooser extends Component{
     constructor(props){
         super(props);
@@ -90,25 +88,14 @@ export default class TagChooser extends Component{
             <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0}}>
                 
                 <SearchBar
-               placeholder="Search"
-               lightTheme={true}
-               showCancel={true}
-               inputContainerStyle={styles.da}
-            containerStyle={styles.search} 
-            cancelButtonTitle="cancel"
-            searchIcon="../assets/images/search.png"
+               placeholder="Search your tags..."
     
                 />
-        <Text h3 style={{ marginLeft: 10, marginBottom: 20, marginTop: 10}}>
-            Popular Tags
-        </Text>         
-               <FlatList 
-                style={styles.flatlist}
-                numColumns={3}
+                <FlatList 
                     data={this.state.tags}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }) => {                       
-                        return (<ChipComponent  mama={this.AddItemToTagList} tata={this.removeItemFromTagList}name={item.name} />);                                
+                        return (<ChipComponent mama={this.AddItemToTagList} tata={this.removeItemFromTagList}name={item.name} />);                                
                         }}
                 />
                 
@@ -120,23 +107,5 @@ export default class TagChooser extends Component{
             )
     }
 }
-
-const styles = StyleSheet.create({
-    search:{
-        backgroundColor: theme.colors.white,
-        borderBottomColor: theme.colors.white,
-        borderTopColor: theme.colors.white,
-        marginTop: -20
-    },
-    da:{
-        backgroundColor: "#efefef",
-        height: 38,
-        borderRadius: 10,
-    fontSize: 20    },
-    flatlist:{
-        marginLeft: 10,
-        marginRight: 10
-    }
-})
 
 

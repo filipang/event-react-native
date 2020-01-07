@@ -102,12 +102,6 @@ const colors = {
       letterSpacing: 0,
       lineHeight: 21,
     },
-    chip: {
-      fontFamily: 'Rubik-Regular',
-      fontSize: 8,
-      color: colors.gray,
-      letterSpacing: 0,
-    }
   };
   
   export {
