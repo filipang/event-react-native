@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import Text from '../components/Text'
 import Block from '../components/Block'
 import Button from "../components/Button";
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const HomeScreen = ({ navigation }) => (
   // <KeyboardAwareScrollView style={{ marginVertical: 40 }} showsVerticalScrollIndicator={false}>

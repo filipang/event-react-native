@@ -9,7 +9,7 @@ import { theme } from "../core/theme";
 import Button from "../components/Button";
 import { sendEmailWithPassword } from "../api/auth-api";
 import Toast from "../components/Toast";
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 const ForgotPasswordScreen = ({ navigation }) => {
@@ -46,7 +46,6 @@ const ForgotPasswordScreen = ({ navigation }) => {
   return (
     // <KeyboardAwareScrollView style={{marginVertical: 20}} showsVerticalScrollIndicator={false}>
     <Block flex center>
-    
     <BackButton goBack={() => navigation.navigate("LoginScreen")} />
 
     <Text h3 style={{marginBottom: 6, marginTop: 48}}>

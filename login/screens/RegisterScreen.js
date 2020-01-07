@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import {
   emailValidator,
