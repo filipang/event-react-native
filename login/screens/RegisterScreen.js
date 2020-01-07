@@ -53,7 +53,7 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    // <KeyboardAwareScrollView style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
+    <KeyboardAwareScrollView style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
 
       <Block flex center>
       <BackButton goBack={() => navigation.navigate("HomeScreen")} />
@@ -120,7 +120,7 @@ const RegisterScreen = ({ navigation }) => {
       </Block>
       </Block>
 
-  // </KeyboardAwareScrollView>  );
+  </KeyboardAwareScrollView>  );
 };
 
 const styles = StyleSheet.create({

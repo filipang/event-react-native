@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const HomeScreen = ({ navigation }) => (
-  // <KeyboardAwareScrollView style={{ marginVertical: 40 }} showsVerticalScrollIndicator={false}>
+  <KeyboardAwareScrollView style={{ marginVertical: 40 }} showsVerticalScrollIndicator={false}>
   <Block flex center>
 
   <Text h3 style={{marginBottom: 6, marginTop: 80}}>Welcome to eVent</Text>
@@ -29,7 +29,7 @@ const HomeScreen = ({ navigation }) => (
    </Button>
    </Block>
    </Block>
-  //  </KeyboardAwareScrollView>
+   </KeyboardAwareScrollView>
 );
 
 export default memo(HomeScreen);
