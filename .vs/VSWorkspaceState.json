@@ -2,11 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\components",
-    "\\login",
-    "\\login\\components",
-    "\\login\\screens",
     "\\screens"
   ],
-  "SelectedNode": "\\login\\screens\\AuthLoadingScreen.js",
+  "SelectedNode": "\\components\\CalendarPicker.js",
   "PreviewInSolutionExplorer": false
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FlatList,View,Platform,TouchableOpacity,Text
+import {FlatList,View,Platform
 } from 'react-native';
 
 import { database } from '../../App'
@@ -11,10 +11,8 @@ export default class TagChooser extends Component{
         this.state=({
             tags: [],
             Integerr: 0,
-            tagListFinal:[],
         });
-        this.AddItemToTagList = this.AddItemToTagList.bind(this);
-        this.removeItemFromTagList = this.removeItemFromTagList.bind(this);
+        this.mama = this.mama.bind(this);
     }
     componentDidMount(){
       try {
@@ -37,36 +35,11 @@ export default class TagChooser extends Component{
     // }
 
     }
-    AddItemToTagList = (numele) => {
-        let tagListFinal = this.state.tagListFinal
-        tagListFinal.push(numele);
-        this.setState({ tagListFinal: tagListFinal })
-        console.log("  ");
-        console.log('1', tagListFinal[0]);
-        console.log('2', tagListFinal[1]);
-        console.log('4', tagListFinal[2]);
-        console.log('5', tagListFinal[3]);
-        console.log('6', tagListFinal[4]);
-        console.log('7', tagListFinal[5]);
-        console.log('8', tagListFinal[6]);
-    }
-    removeItemFromTagList = (numele) => {
-        let tagListFinal = this.state.tagListFinal;
-        for (i = 0; i < tagListFinal.length; i++)        
-            if (tagListFinal[i] == numele)
-                tagListFinal.splice(i, 1);
-
-        this.setState({ tagListFinal: tagListFinal })
-
-        console.log("  ");
-        console.log('1', tagListFinal[0]);
-        console.log('2', tagListFinal[1]);
-        console.log('4', tagListFinal[2]);
-        console.log('5', tagListFinal[3]);
-        console.log('6', tagListFinal[4]);
-        console.log('7', tagListFinal[5]);
-        console.log('8', tagListFinal[6]);
-        this.setState({ tagListFinal: tagListFinal })
+    mama = () => {
+        let nr = this.state.Integerr;
+        nr++;
+        this.setState({Integerr:nr})
+        console.log(nr);
     }
     retrieveData = async () => {
       try {
@@ -95,14 +68,11 @@ export default class TagChooser extends Component{
                     data={this.state.tags}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }) => {                       
-                        return (<ChipComponent mama={this.AddItemToTagList} tata={this.removeItemFromTagList}name={item.name} />);                                
+                        return (<ChipComponent mama={this.mama} name={item.name} />);                                
                         }}
                 />
-                
 
-                <TouchableOpacity onPress={() => { console.log(this.state.tagListFinal.forEach(element => console.log(element)))}}>
-                 <Text>Testam Arrayul</Text>
-                </TouchableOpacity>
+
             </View>
             )
     }

@@ -21,7 +21,7 @@ export default class ChipComponent extends React.Component {
     }
     componentDidMount() {
         try {
-            
+            this.props.mama;
             console.log('Lol ', this.props.mama);
         }
         catch (error) {
@@ -32,16 +32,7 @@ export default class ChipComponent extends React.Component {
         return (
             <Chip
                 onPress={() => {
-                    if (this.state.selection == false) {
-                        this.props.mama(this.state.name);
-                        this.setState({ selection: true });
-
-                    } else {
-                        this.setState({ selection: false });
-                        this.props.tata(this.state.name);
-
-                    }
-                    
+                    this.props.mama();
                     
                 }
                 }
