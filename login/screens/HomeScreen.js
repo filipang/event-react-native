@@ -1,11 +1,16 @@
 import React, { memo } from "react";
-import Text from '../components/Text'
+import { Platform } from "react-native";
+import 
+Text from '../components/Text'
 import Block from '../components/Block'
 import Button from "../components/Button";
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-const HomeScreen = ({ navigation }) => (
-  // <KeyboardAwareScrollView style={{ marginVertical: 40 }} showsVerticalScrollIndicator={false}>
+const HomeScreen = ({ navigation }) => {
+  return(
+  <KeyboardAwareScrollView  enableOnAndroid={true}
+  enableAutomaticScroll={(Platform.OS === 'ios')}
+  style={{ marginVertical: 40 }} showsVerticalScrollIndicator={false}>
   <Block flex center>
 
   <Text h3 style={{marginBottom: 6, marginTop: 80}}>Welcome to eVent</Text>
@@ -29,7 +34,7 @@ const HomeScreen = ({ navigation }) => (
    </Button>
    </Block>
    </Block>
-  //  </KeyboardAwareScrollView>
-);
+   </KeyboardAwareScrollView>
+  )};
 
 export default memo(HomeScreen);

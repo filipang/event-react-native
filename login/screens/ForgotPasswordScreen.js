@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { emailValidator } from "../core/utils";
 import BackButton from "../components/BackButton";
 import Text from '../components/Text';
@@ -9,7 +9,7 @@ import { theme } from "../core/theme";
 import Button from "../components/Button";
 import { sendEmailWithPassword } from "../api/auth-api";
 import Toast from "../components/Toast";
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 const ForgotPasswordScreen = ({ navigation }) => {
@@ -44,7 +44,9 @@ const ForgotPasswordScreen = ({ navigation }) => {
   };
 
   return (
-    // <KeyboardAwareScrollView style={{marginVertical: 20}} showsVerticalScrollIndicator={false}>
+    <KeyboardAwareScrollView  enableOnAndroid={true}
+    enableAutomaticScroll={(Platform.OS === 'ios')}
+     style={{marginVertical: 20}} showsVerticalScrollIndicator={false}>
     <Block flex center>
     
     <BackButton goBack={() => navigation.navigate("LoginScreen")} />
@@ -87,7 +89,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
       />
       </Block>
       </Block>
-// </KeyboardAwareScrollView>
+ </KeyboardAwareScrollView>
 
 );
 };

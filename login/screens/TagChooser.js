@@ -3,10 +3,12 @@ import {FlatList,View,Platform,TouchableOpacity, StyleSheet
 } from 'react-native';
 import * as theme from '../components/theme'
 import { IonIcons } from '@expo/vector-icons'
-import { database } from '../../App'
 import { SearchBar } from 'react-native-elements';
 import ChipComponent from '../../components/ChipComponent';
 import Text from '../components/Text';
+import { database } from '../../App';
+import firebase from 'firebase';
+import Button from '../components/Button';
 export default class TagChooser extends Component{
     constructor(props){
         super(props);
@@ -14,6 +16,8 @@ export default class TagChooser extends Component{
             tags: [],
             Integerr: 0,
             tagListFinal:[],
+            filteredTagLlist: [],
+            searchText: "",
         });
         this.AddItemToTagList = this.AddItemToTagList.bind(this);
         this.removeItemFromTagList = this.removeItemFromTagList.bind(this);
@@ -26,18 +30,14 @@ export default class TagChooser extends Component{
       catch (error) {
         console.log(error);
       }
-      
-    //     this.unsubscribe = this.ref.onSnapshot((querySnapshot) => {
-    //         const taguri = [];
-    //         querySnapshot.forEach((doc) => {
-    //             taguri.push({
-    //                 name: doc.data().name
-    //             });
-    //         });
-       
-    //     })
-    // }
+    }
 
+    search = (searchText) => {
+        this.setState({searchText: searchText});
+        let filteredTagLlist = this.state.tags.filter(function(item){
+            return item.name.toLowerCase().includes(searchText);
+        });
+        this.setState({filteredTagLlist: filteredTagLlist})
     }
     AddItemToTagList = (numele) => {
         let tagListFinal = this.state.tagListFinal
@@ -70,6 +70,24 @@ export default class TagChooser extends Component{
         console.log('8', tagListFinal[6]);
         this.setState({ tagListFinal: tagListFinal })
     }
+
+    _storeItemsInFirestore(){
+        var taguri = [];
+        database.collection('tags').get().then(querySnapshot => {
+                querySnapshot.forEach(documentSnapshot => {    
+                    console.log(this.state.tagListFinal)
+                    if(this.state.tagListFinal.includes(documentSnapshot.get('name'))){
+                        taguri.push(documentSnapshot.ref);    
+                    }
+                });
+            console.log(taguri);
+
+            database.collection('users').doc(firebase.auth().currentUser.uid).set({
+                email: firebase.auth().currentUser.email,
+                tags: taguri
+            });
+        }); 
+    }
     retrieveData = async () => {
       try {
           let initialQuery = await database.collection('tags'); 
@@ -90,14 +108,13 @@ export default class TagChooser extends Component{
             <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0}}>
                 
                 <SearchBar
+                onChangeText={this.search}
+                value={this.state.searchText}
                placeholder="Search"
                lightTheme={true}
                showCancel={true}
-               inputContainerStyle={styles.da}
             containerStyle={styles.search} 
             cancelButtonTitle="cancel"
-            searchIcon="../assets/images/search.png"
-    
                 />
         <Text h3 style={{ marginLeft: 10, marginBottom: 20, marginTop: 10}}>
             Popular Tags
@@ -105,7 +122,7 @@ export default class TagChooser extends Component{
                <FlatList 
                 style={styles.flatlist}
                 numColumns={3}
-                    data={this.state.tags}
+                    data={this.state.filteredTagLlist && this.state.filteredTagLlist.length > 0 ? this.state.filteredTagLlist : this.state.tags}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }) => {                       
                         return (<ChipComponent  mama={this.AddItemToTagList} tata={this.removeItemFromTagList}name={item.name} />);                                
@@ -113,9 +130,10 @@ export default class TagChooser extends Component{
                 />
                 
 
-                <TouchableOpacity onPress={() => { console.log(this.state.tagListFinal.forEach(element => console.log(element)))}}>
-                 <Text>Testam Arrayul</Text>
-                </TouchableOpacity>
+                 <Button
+                 onPress={this._storeItemsInFirestore.bind(this)}>
+                     <Text button>Continue</Text>
+                 </Button>
             </View>
             )
     }
@@ -128,11 +146,7 @@ const styles = StyleSheet.create({
         borderTopColor: theme.colors.white,
         marginTop: -20
     },
-    da:{
-        backgroundColor: "#efefef",
-        height: 38,
-        borderRadius: 10,
-    fontSize: 20    },
+    
     flatlist:{
         marginLeft: 10,
         marginRight: 10

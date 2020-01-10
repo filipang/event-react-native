@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Platform } from "react-native";
 import Text from '../components/Text'
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
@@ -46,7 +46,10 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    // <KeyboardAwareScrollView style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
+    <KeyboardAwareScrollView 
+    enableOnAndroid={true}
+    enableAutomaticScroll={(Platform.OS === 'ios')}
+    style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
 
 
 
@@ -106,7 +109,7 @@ const LoginScreen = ({ navigation }) => {
       
       </Block>
       </Block>
-      // </KeyboardAwareScrollView>
+       </KeyboardAwareScrollView>
   );
 };
 

@@ -19,7 +19,7 @@ const AuthLoadingScreen = ({ navigation }) => {
   });
 
   return (
-    <Block flex center>
+    <Block center middle>
       <ActivityIndicator size="large" color={theme.colors.blue} />
     </Block>
   );

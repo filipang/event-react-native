@@ -42,7 +42,7 @@ export default class SearchPost extends Component {
     search = (searchText) => {
         this.setState({searchText: searchText});
         let filteredData = this.state.documentData.filter(function(item){
-            return item.title.includes(searchText);
+            return item.title.toLowerCase().includes(searchText);
         });
         this.setState({filteredData: filteredData})
     }
