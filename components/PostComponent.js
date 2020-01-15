@@ -22,7 +22,7 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
     
     
 
-    var matchPercentageColor;
+    var matchPercentageColor;  
     if (matchPercentage < 50)
         matchPercentageColor = "#ffb84d";
     else if (matchPercentage < 75)

@@ -1,12 +1,11 @@
 import React, { memo, useState } from "react";
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import Text from '../components/Text'
 import Block from "../components/Block";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import {
   emailValidator,
@@ -53,10 +52,7 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAwareScrollView
-    enableOnAndroid={true}
-    enableAutomaticScroll={(Platform.OS === 'ios')}
-    style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
+    <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0}}>
 
       
     <Block flex center>
@@ -124,8 +120,7 @@ const RegisterScreen = ({ navigation }) => {
       </Block>
       </Block>
 
-  </KeyboardAwareScrollView> 
-   );
+      </View>   );
 };
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { StyleSheet, Dimensions, Platform } from "react-native";
+import { StyleSheet, Dimensions, View } from "react-native";
 import Text from '../components/Text'
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
@@ -9,7 +9,6 @@ import Toast from "../components/Toast";
 import Block from '../components/Block';
 import Input from '../components/Input'
 import Button from '../components/Button'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 const { height } = Dimensions.get('window');
@@ -46,10 +45,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAwareScrollView 
-    enableOnAndroid={true}
-    enableAutomaticScroll={(Platform.OS === 'ios')}
-    style={{ marginVertical: 20 }} showsVerticalScrollIndicator={false}>
+    <View>
 
 
 
@@ -109,8 +105,9 @@ const LoginScreen = ({ navigation }) => {
       
       </Block>
       </Block>
-       </KeyboardAwareScrollView>
-  );
+      </View>
+      
+);
 };
 
 const styles = StyleSheet.create({

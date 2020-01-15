@@ -8,7 +8,8 @@ import ChipComponent from '../../components/ChipComponent';
 import Text from '../components/Text';
 import { database } from '../../App';
 import firebase from 'firebase';
-import Button from '../components/Button';
+import Button from '../components/Button';4
+
 export default class TagChooser extends Component{
     constructor(props){
         super(props);
@@ -22,6 +23,7 @@ export default class TagChooser extends Component{
         this.AddItemToTagList = this.AddItemToTagList.bind(this);
         this.removeItemFromTagList = this.removeItemFromTagList.bind(this);
     }
+
     componentDidMount(){
       try {
         // Cloud Firestore: Initial Query
@@ -86,7 +88,7 @@ export default class TagChooser extends Component{
                 email: firebase.auth().currentUser.email,
                 tags: taguri
             });
-        }); 
+        });
     }
     retrieveData = async () => {
       try {
@@ -103,7 +105,7 @@ export default class TagChooser extends Component{
         console.log(error);
       }
     };
-    render(){    
+    render(){  
         return(
             <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0}}>
                 
