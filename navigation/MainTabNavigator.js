@@ -42,7 +42,7 @@ HomeStack.path = '';
 //Aici inclocuieste tu serban
 const LinksStack = createStackNavigator(
     {
-        Links: DiscoverScreen,
+        Links: OurSettingScreen,
   },
   config
 );

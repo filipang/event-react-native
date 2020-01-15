@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
  imageStyle: {
             height: 400,
             width: width,
-            resizeMode: 'stretch',
+            //resizeMode: 'stretch',
         },
 });
 

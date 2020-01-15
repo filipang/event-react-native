@@ -1,9 +1,9 @@
 import React from 'react';
-import { Text, StyleSheet, View, Image, Alert } from 'react-native';
+import { Text, StyleSheet, View, Image, Alert, Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
-
+const { height, width } = Dimensions.get('window'); 
 
 
 const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deUndeVinePoza, description, startDate, endDate }) => {
@@ -35,8 +35,8 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
         <View style={styles.container}>
             <View style={{height: 65}}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={{ color: 'black', fontSize: 15, marginHorizontal: 5 }}> {titleEvent}</Text>
-                    <Text style={{ color: matchPercentageColor, fontSize: 25, marginHorizontal: 10 }}>{matchPercentage}%</Text>
+                    <Text style={styles.textTitle}> {titleEvent}</Text>
+                    <Text style={...styles.textTitle,color: matchPercentageColor, marginHorizontal: 10 }}>{matchPercentage}%</Text>
                     
                 </View>
                 <View style={{ flexDirection: 'column' }}>
@@ -68,8 +68,8 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
                 </TouchableOpacity> 
                              
             </View>
-            <TouchableOpacity onPress={() => { navigation.navigate({ routeName: 'Links', params: { skill: TransmitInformatii}})}} style={{ paddingVertical: 10, fontSize: 16 }}>
-                <Text>{description} ...</Text>
+            <TouchableOpacity onPress={() => { navigation.navigate({ routeName: 'Links', params: { skill: TransmitInformatii } }) }} style={styles.textView}>
+                <Text style={styles.text}>{description} ...</Text>
             </TouchableOpacity>
         </View>)
 
@@ -80,21 +80,23 @@ const PostComponent = ({ navigation, titleEvent, matchPercentage, dateEvent, deU
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff2f2',
+        backgroundColor: 'white',
         borderRadius: 5,
         marginHorizontal: 0,
         marginVertical:0,
     },
     imageStyle: {
         height: 400,
-        width: 400,
+        width: width,
         resizeMode: 'stretch',
     },
-    textsize: {
+    textView: {
         
         flexDirection: 'row',
-        flex: 1,
-        justifyContent: 'space-between',
+        width: width - 55,
+        alignContent: 'center',
+        justifyContent: 'flex-start',
+        
 
 
     },
@@ -111,9 +113,20 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         borderTopWidth: 1,
         paddingBottom: 10,
-        borderBottomColor: 'black',
-        borderBottomWidth: 1,
+        
 
+    },
+    textTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        paddingLeft: 15,
+        marginHorizontal:15,
+    },
+    text: {
+        fontSize: 16,
+        
+        paddingLeft: 5,
+        marginHorizontal: 10,
     }
    
 
