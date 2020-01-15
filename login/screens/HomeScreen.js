@@ -1,13 +1,13 @@
 import React, { memo } from "react";
-import { View } from "react-native";
+import { View, Platform } from "react-native";
 import Text from '../components/Text'
 import Block from '../components/Block'
 import Button from "../components/Button";
 
 const HomeScreen = ({ navigation }) => {
   return(
-  <View>
-  <Block flex center>
+      <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0 }}>
+  <Block center>
 
   <Text h3 style={{marginBottom: 6, marginTop: 80}}>Welcome to eVent</Text>
    <Text paragraph color="black3">Find all your events. In one place.</Text>

@@ -55,7 +55,7 @@ const RegisterScreen = ({ navigation }) => {
     <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0}}>
 
       
-    <Block flex center>
+    <Block center>
       <BackButton goBack={() => navigation.navigate("HomeScreen")} />
 
         <Text h3 style={{marginBottom: 6, marginTop: 48}}

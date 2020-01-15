@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { StyleSheet, Dimensions, View } from "react-native";
+import { StyleSheet, Dimensions, View, Platform } from "react-native";
 import Text from '../components/Text'
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
@@ -45,11 +45,11 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
+      <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0 }}>
 
 
 
-    <Block flex center>
+    <Block center>
 
       <BackButton goBack={() => navigation.navigate("HomeScreen")} />
 

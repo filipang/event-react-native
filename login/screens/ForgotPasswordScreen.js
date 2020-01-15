@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import { emailValidator } from "../core/utils";
 import BackButton from "../components/BackButton";
 import Text from '../components/Text';
@@ -43,8 +43,8 @@ const ForgotPasswordScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
-    <Block flex center>
+      <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0 }}>
+    <Block center>
     
     <BackButton goBack={() => navigation.navigate("LoginScreen")} />
 
