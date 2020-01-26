@@ -8,9 +8,10 @@ import ChipComponent from '../../components/ChipComponent';
 import Text from '../components/Text';
 import { database } from '../../App';
 import firebase from 'firebase';
+import { withNavigation } from 'react-navigation';
 import Button from '../components/Button';4
 
-export default class TagChooser extends Component{
+class TagChooser extends Component{
     constructor(props){
         super(props);
         this.state=({
@@ -19,6 +20,7 @@ export default class TagChooser extends Component{
             tagListFinal:[],
             filteredTagLlist: [],
             searchText: "",
+            Loc:this.props.merg,
         });
         this.AddItemToTagList = this.AddItemToTagList.bind(this);
         this.removeItemFromTagList = this.removeItemFromTagList.bind(this);
@@ -27,7 +29,8 @@ export default class TagChooser extends Component{
     componentDidMount(){
       try {
         // Cloud Firestore: Initial Query
-        this.retrieveData();
+          this.retrieveData();
+          console.log(this.state.Loc);
       }
       catch (error) {
         console.log(error);
@@ -132,8 +135,12 @@ export default class TagChooser extends Component{
                 />
                 
 
-                 <Button
-                 onPress={this._storeItemsInFirestore.bind(this)}>
+                <Button
+                    onPress={() => {
+                        this.state.Loc.navigate("AppNavigator");
+                        this._storeItemsInFirestore.bind(this);
+                    }}                       
+                                       >
                      <Text button>Continue</Text>
                  </Button>
             </View>
@@ -156,3 +163,4 @@ const styles = StyleSheet.create({
 })
 
 
+export default withNavigation(TagChooser);

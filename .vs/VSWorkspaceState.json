@@ -1,12 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\components",
     "\\login",
-    "\\login\\components",
-    "\\login\\screens",
-    "\\screens"
+    "\\navigation",
+    "\\__tests__",
+    "\\__tests__\\__snapshots__"
   ],
-  "SelectedNode": "\\login\\screens\\AuthLoadingScreen.js",
   "PreviewInSolutionExplorer": false
 }

@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 export default class Block extends Component {
     render(){
-        const { flex, row, center, middle, right, space, style, children, ...props } = this.props;
+        const { left,flex, row, center, middle, right, space, style, children, ...props } = this.props;
         const blockStyles = [
             styles.block,
             flex && { flex },
@@ -13,6 +13,7 @@ export default class Block extends Component {
             right && styles.right,
             space && { justifyContent: `space-${space}` },
             row && styles.row,
+            left && styles.left,
             style,
           ];
 
@@ -39,5 +40,8 @@ const styles = StyleSheet.create({
     },
     right: {
       justifyContent: 'flex-end'
+    },
+    left: {
+        justifyContent: 'flex-start'
     },
   });

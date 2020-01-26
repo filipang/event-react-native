@@ -8,6 +8,7 @@ import TestScrin from '../screens/TestScrin';
 import CalendarScreen from '../screens/CalendarScreen';
 import OurSettingScreen from '../screens/OurSettingScreen';
 import DiscoverScreen from '../screens/DiscoverScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -60,6 +61,8 @@ const SettingsStack = createStackNavigator(
   {
         Settings: OurSettingScreen,
         Settings_calendar: CalendarScreen,
+        Discov: DiscoverScreen,
+        Homm: TestScrin,
   },
   config
 );

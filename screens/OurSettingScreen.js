@@ -1,17 +1,23 @@
 import React from 'react';
-import { Text, StyleSheet, Dimensions, View, Alert, Image, ScrollView, TouchableOpacity } from 'react-native';
+import {Platform,StyleSheet, Dimensions, View, Alert, Image, ScrollView, TouchableOpacity } from 'react-native';
+import BackButton from "../login/components/BackButton";
+import Block from "../login/components/Block";
+import Text from '../login/components/Text';
 const { height, width } = Dimensions.get('window'); 
 
 const OurSettingsScreen = ({ navigation }) => {
     return (
-        <View>
+        <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0 }}>
+            <BackButton goBack={() => navigation.navigate("Homm")} />
+            <Block left style={{ marginLeft: 10, marginTop:40}}>
+                 
             <TouchableOpacity onPress={() => { navigation.navigate({ routeName: 'Settings_calendar' }) }}>
-                <Text style={{ fontSize: 40, marginTop:40 }}>Calendar</Text>
+                <Text h1 >Calendar</Text>
            </TouchableOpacity>
             <TouchableOpacity>
-                <Text style={{ fontSize: 40, }}>Tags</Text>
+                <Text h1 >Tags</Text>
             </TouchableOpacity>
-
+            </Block>
         </View>
         );
 
