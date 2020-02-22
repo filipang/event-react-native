@@ -7,8 +7,7 @@ const { height, width } = Dimensions.get('window');
 
 const OurSettingsScreen = ({ navigation }) => {
     return (
-        <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0 }}>
-            <BackButton goBack={() => navigation.navigate("Homm")} />
+        <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0 }}>           
             <Block left style={{ marginLeft: 10, marginTop:40}}>
                  
             <TouchableOpacity onPress={() => { navigation.navigate({ routeName: 'Settings_calendar' }) }}>
@@ -16,7 +15,13 @@ const OurSettingsScreen = ({ navigation }) => {
            </TouchableOpacity>
             <TouchableOpacity>
                 <Text h1 >Tags</Text>
-            </TouchableOpacity>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { navigation.navigate({ routeName: 'Settings_calendar' }) }}>
+                    <Text h1 >Account Settings</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { navigation.navigate({ routeName: 'Tos' }) }}>
+                    <Text h1 >About</Text>
+                </TouchableOpacity>
             </Block>
         </View>
         );

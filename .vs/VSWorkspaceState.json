@@ -1,10 +1,15 @@
 {
   "ExpandedNodes": [
     "",
+    "\\components",
+    "\\components\\__tests__",
+    "\\components\\__tests__\\__snapshots__",
     "\\login",
+    "\\login\\api",
+    "\\login\\components",
+    "\\login\\screens",
     "\\navigation",
-    "\\__tests__",
-    "\\__tests__\\__snapshots__"
+    "\\screens"
   ],
   "PreviewInSolutionExplorer": false
 }
